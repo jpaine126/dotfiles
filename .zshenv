@@ -1,4 +1,4 @@
-#!/bin zsh
+#!/bin/usr/env bash
 
 export DOTFILES="$HOME/dotfiles"
 
