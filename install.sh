@@ -2,12 +2,12 @@
 
 echo "Jeff's zsh Environment"
 
-source ./.zshenv
+source ./zsh/.zshenv
 
 # zsh
 
-ln -sf "$DOTFILES/.zshenv" "$HOME/.zshenv"
-ln -sf "$DOTFILES/.zshrc" "$HOME/.zshrc" 
+ln -sf "$DOTFILES/zsh/.zshenv" "$HOME/.zshenv"
+ln -sf "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc" 
 
 
 # tmux
