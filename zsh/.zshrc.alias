@@ -6,3 +6,6 @@ alias cd3='cd ../../..'
 alias cd4='cd ../../../..'
 
 alias zsource='source ~/.zshrc'
+
+# tree
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|;|;g'"
