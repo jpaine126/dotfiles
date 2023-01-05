@@ -9,4 +9,4 @@ export SAVEHIST=10000
 
 
 # editor 
-export EDITOR="nano"
+export EDITOR="vim"
