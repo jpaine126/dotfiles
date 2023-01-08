@@ -1,11 +1,25 @@
-alias ll='ls -la'
+# general
+alias ll="ls -la"
 
-alias cd1='cd ..'
-alias cd2='cd ../..'
-alias cd3='cd ../../..'
-alias cd4='cd ../../../..'
+alias cd1="cd .."
+alias cd2="cd ../.."
+alias cd3="cd ../../.."
+alias cd4="cd ../../../.."
+alias cd5="cd ../../../../.."
 
-alias zsource='source ~/.zshrc'
+alias zsource="source ~/.zshrc"
+
 
 # tree
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|;|;g'"
+
+
+# git
+alias gita="git add"
+alias gitcm="git commit -m"
+
+
+# conda
+alias condae="conda info --envs"
+alias condaa="conda activate"
+
