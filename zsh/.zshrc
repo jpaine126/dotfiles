@@ -1,7 +1,12 @@
-source "$DOTFILES/.zshrc.alias"
+source "$DOTFILES/zsh/.zshrc.alias"
 
-autoload -U promptinit && promptinit
-prompt adam1
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+setopt PROMPT_SUBST
+
+PROMPT='%{%K{blue}%}%n%{%K{none}%} %{%F{green}%}%~%{%F{none}%}%{%K{green}%}$(parse_git_branch)%{%K{none}%} > '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -17,4 +22,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
