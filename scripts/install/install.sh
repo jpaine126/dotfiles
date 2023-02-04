@@ -10,7 +10,6 @@ if ! command -v zsh >/dev/null 2>&1; then
 else
     ln -sf "$DOTFILES/zsh/.zshenv" "$HOME/.zshenv"
     ln -sf "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc" 
-    ln -sf "$DOTFILES/zsh/.zshrc.alias" "$HOME/.zshrc.alias"
 fi
 
 # tmux
