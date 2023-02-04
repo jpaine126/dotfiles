@@ -22,4 +22,3 @@ alias gitcm="git commit -m"
 # conda
 alias condae="conda info --envs"
 alias condaa="conda activate"
-
