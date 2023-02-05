@@ -6,3 +6,6 @@ flatpak install flathub com.valvesoftware.SteamLink
 
 sudo apt-get install -y steam-devices
 sudo apt-get install -y steam
+
+sudo apt-get install -y openssh-client
+sudo apt-get install -y openssh-server
