@@ -1,0 +1,5 @@
+setopt AUTO_PUSHD
+setopt AUTO_CD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+setopt PUSHD_MINUS

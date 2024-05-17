@@ -1,0 +1,54 @@
+autoload -Uz colors vcs_info
+colors
+
+export EMPTY_STYLE='%f%k%F{default}%K{default}'
+
+export GREEN_BG_P='%f%k%F{default}%K{green}'
+export BLUE_BG_P='%f%k%F{default}%K{blue}'
+export RED_BG_P='%f%k%F{default}%K{red}'
+export YELLOW_BG_P='%f%k%F{default}%K{yellow}'
+
+export GREENP='%f%k%F{green}%K{default}'
+export BLUEP='%f%k%F{blue}%K{default}'
+export REDP='%f%k%F{red}%K{default}'
+export YELLOWP='%f%k%F{yellow}%K{default}'
+export CYANP='%f%k%F{cyan}%K{default}'
+export BLACKP='%f%k%F{black}%K{default}'
+export WHITEP='%f%k%F{white}%K{default}'
+export DEFAULTP='%f%k%F{default}%K{default}'
+
+# export LSCOLORS="no=37;40:fi=37;40:di=36:40;ln=35;40:pi=31;40:so=22;40:bd=44;37:cd=44;37:ex=32;40"
+
+export PROMPT_NUM_DIRS=3
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' enable-for-changes true
+zstyle ':vcs_info:git*:-all-' git
+zstyle ':vcs_info:git*:' actionformats "%b %i %u %c %a"
+zstyle ':vcs_info:git*:' formats "%b %i %u %c"
+
+precmd() {
+    vcs_info
+}
+
+setopt PROMPT_SUBST
+
+export USER_HOST_COLOR=$BLUE_BG_P
+export GIT_INFO_COLOR=$YELLOWP
+export CWD_COLOR=$GREENP
+
+export CMD_LINE_COLOR=$EMPTY_STYLE
+
+export SEG_SEP="${EMPTY_STYLE} "
+
+export ENDSYMBOL="${EMPTY_STYLE}>"
+
+git_seg() {
+    if [[ $vcs_info_msg_0_ != '' ]]; then
+        echo "${SEG_SEP}${GIT_INFO_COLOR}${vcs_info_msg_0_}"
+    else
+        echo ''
+    fi
+}
+
+PROMPT="${USER_HOST_COLOR}%n@%m$(git_seg)${SEG_SEP}${CWD_COLOR}%${PROMPT_NUM_DIRS}~${SEG_SEP}${ENDSYMBOL}${SEG_SEP}${CMD_LINE_COLOR}"
