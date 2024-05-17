@@ -15,7 +15,7 @@ syntax enable
 set wildmenu
 
 "Searching
-set expandtabset
+set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
