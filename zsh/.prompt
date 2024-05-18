@@ -22,16 +22,16 @@ export DEFAULTP='%f%k%F{default}%K{default}'
 export PROMPT_NUM_DIRS=3
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' enable-for-changes true
+zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git*:-all-' git
-zstyle ':vcs_info:git*:' actionformats "%b %i %u %c %a"
-zstyle ':vcs_info:git*:' formats "%b %i %u %c"
+zstyle ':vcs_info:git*' actionformats "%b %u%c%a"
+zstyle ':vcs_info:git*' formats "%b %u%c"
 
 precmd() {
     vcs_info
 }
 
-setopt PROMPT_SUBST
+setopt prompt_subst
 
 export USER_HOST_COLOR=$BLUE_BG_P
 export GIT_INFO_COLOR=$YELLOWP
@@ -51,4 +51,4 @@ git_seg() {
     fi
 }
 
-PROMPT="${USER_HOST_COLOR}%n@%m$(git_seg)${SEG_SEP}${CWD_COLOR}%${PROMPT_NUM_DIRS}~${SEG_SEP}${ENDSYMBOL}${SEG_SEP}${CMD_LINE_COLOR}"
+PROMPT='${USER_HOST_COLOR}%n@%m$(git_seg)${SEG_SEP}${CWD_COLOR}%${PROMPT_NUM_DIRS}~${SEG_SEP}${ENDSYMBOL}${SEG_SEP}${CMD_LINE_COLOR}'
