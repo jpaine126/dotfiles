@@ -1,0 +1,3 @@
+balenaEtcher
+NTFS for Mac
+
