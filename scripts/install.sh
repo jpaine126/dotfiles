@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
+linkfiles() {
+    mkdir -p -v $DOTFILES_DEST/.config/$1
+    find $1 -maxdepth 1 -type f -exec ln -svf $DOTFILES/{} ${DOTFILES_DEST}/.config/{} \;
+}
+
 install_links () {
     echo "Installing Jeff's zsh Environment in $DOTFILES into $DOTFILES_DEST"
+
+    original_folder=$(pwd)
 
     default_exclusion_regex='\exclude*|\.git$|\.gitignore|.*.md|.*~$'
 
@@ -25,6 +32,12 @@ install_links () {
     # link specific files with no pattern
     mkdir -p "${DOTFILES_DEST}/.vim"
     ln -svf "${DOTFILES}/ftplugin" "${DOTFILES_DEST}/.vim"
+
+    cd $DOTFILES
+    for file in $(find nvim -type d); do
+        linkfiles $file
+    done
+    cd $original_folder
 }
 
 
@@ -46,7 +59,6 @@ ABSPATH="$(readlinkf ./non-absolute/file)"
 
 export DOTFILES=$(dirname $(dirname $(readlinkf $0)))
 export DOTFILES_DEST=$HOME
-
 
 
 # zsh

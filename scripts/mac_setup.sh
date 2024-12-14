@@ -15,3 +15,11 @@ fi
 if ! which tmux ls > /dev/null; then
     sudo brew install tmux
 fi
+
+if ! which nvim > /dev/null; then
+    sudo brew install nvim
+fi
+
+if ! which fzf > /dev/null; then
+    sudo brew install fzf
+fi
