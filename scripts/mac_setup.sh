@@ -8,10 +8,10 @@ brew upgrade
 
 
 if ! which zsh > /dev/null; then
-    sudo brew install zsh
+    brew install zsh
     chsh -s /usr/local/bin/zsh
 fi
 
 if ! which tmux ls > /dev/null; then
-    sudo brew install tmux
+    brew install tmux
 fi
