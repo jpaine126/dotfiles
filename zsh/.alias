@@ -31,10 +31,10 @@ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|;|;g'"
 
 
 # git
-alias gita="git add"
-alias gitcm="git commit -m"
+alias ga="git add"
+alias gcm="git commit -m"
 
 
 # conda
-alias condae="conda info --envs"
+alias condaenvs="conda info --envs"
 alias condaa="conda activate"
