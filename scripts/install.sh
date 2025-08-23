@@ -25,6 +25,9 @@ install_links () {
     # link specific files with no pattern
     mkdir -p "${DOTFILES_DEST}/.vim"
     ln -svf "${DOTFILES}/ftplugin" "${DOTFILES_DEST}/.vim"
+
+    source $DOTFILES_DEST/zsh/.functions
+    cp_softlink "${DOTFILES}/nvim" "${DOTFILES_DEST}/.config/nvim"
 }
 
 
