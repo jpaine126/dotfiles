@@ -20,6 +20,11 @@ if ! which nvim ls > /dev/null; then
     brew install nvim
 fi
 
+if ! which fzf ls > /dev/null; then
+    brew install fzf
+    $(brew --prefix)/opt/fzf/install --all
+fi
+
 if ! which uv ls > /dev/null; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
 fi

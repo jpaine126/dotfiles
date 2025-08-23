@@ -19,3 +19,5 @@ setopt MULTIOS
 
 
 . "$HOME/.local/bin/env"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
