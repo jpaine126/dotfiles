@@ -17,3 +17,5 @@ setopt MULTIOS
 # [[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" history-beginning-search-backward
 # [[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" history-beginning-search-forward
 
+
+. "$HOME/.local/bin/env"
