@@ -35,6 +35,12 @@ alias ga="git add"
 alias gcm="git commit -m"
 
 
+# apps
+if which nvim ls > /dev/null; then
+    alias vim="nvim"
+fi
+
 # conda
 alias condaenvs="conda info --envs"
 alias condaa="conda activate"
+
