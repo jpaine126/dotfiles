@@ -15,3 +15,13 @@ fi
 if ! which tmux ls > /dev/null; then
     brew install tmux
 fi
+
+if ! which nvim ls > /dev/null; then
+    brew install nvim
+fi
+
+if ! which uv ls > /dev/null; then
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+fi
+
+
