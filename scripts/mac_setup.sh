@@ -25,6 +25,11 @@ if ! which fzf ls > /dev/null; then
     $(brew --prefix)/opt/fzf/install --all
 fi
 
+# needed for mason
+if ! which npm ls > /dev/null; then
+    brew install npm
+fi
+
 if ! which uv ls > /dev/null; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
