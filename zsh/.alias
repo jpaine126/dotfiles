@@ -40,6 +40,10 @@ if which nvim ls > /dev/null; then
     alias vim="nvim"
 fi
 
+vactivate () {
+    source "${1}/bin/activate"
+}
+
 # conda
 alias condaenvs="conda info --envs"
 alias condaa="conda activate"
