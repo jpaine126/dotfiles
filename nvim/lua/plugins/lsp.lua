@@ -62,6 +62,7 @@ return {
             vim.lsp.enable("lua_ls")
 
             -- python
+            local is_ruff_installed = vim.fn.executable("ruff")
             require('lspconfig').pyright.setup {
                 settings = {
                     pyright = {
@@ -76,28 +77,33 @@ return {
                     },
                 },
             }
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
-                callback = function(args)
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    if client == nil then
-                        return
-                    end
-                    if client.name == 'ruff' then
-                        -- Disable hover in favor of Pyright
-                        client.server_capabilities.hoverProvider = false
-                    end
-                end,
-                desc = 'LSP: Disable hover capability from Ruff',
-            })
-            require("lspconfig").ruff.setup({
-                init_options = {
-                    settings = {
-                        lint = { select = {"ALL"} }
+            vim.lsp.enable("pyright")
+            -- if ruff is installed, turn a bunch of pyright off
+            if is_ruff_installed == 1 then
+                vim.api.nvim_create_autocmd("LspAttach", {
+                    group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+                    callback = function(args)
+                        local client = vim.lsp.get_client_by_id(args.data.client_id)
+                        if client == nil then
+                            return
+                        end
+                        if client.name == 'ruff' then
+                            -- Disable hover in favor of Pyright
+                            client.server_capabilities.hoverProvider = false
+                        end
+                    end,
+                    desc = 'LSP: Disable hover capability from Ruff',
+                })
+
+                require("lspconfig").ruff.setup({
+                    init_options = {
+                        settings = {
+                            lint = { select = {"ALL"} }
+                        }
                     }
-                }
-            })
-            vim.lsp.enable("ruff")
+                })
+                vim.lsp.enable("ruff")
+            end
         end,
     }
 }
