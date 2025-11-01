@@ -25,3 +25,20 @@ cp_softlink () {
         fi
     done
 }
+
+sha_archive () {
+    find_dir=$(readlink -f .)
+    output_file="$(basename $find_dir).sha256"
+    echo "writing sha's to $output_file"
+    find . -type f -not -name $output_file -exec sha256sum {} \; | tee $output_file
+    sha256sum $output_file | tee $output_file.sha256
+    echo done
+}
+
+archive_check () {
+    output_file="$(basename $(readlink -f .)).sha256"
+    echo "Checking archive $output_file ..."
+    sha256sum -c $output_file.sha256
+    sha256sum -c $output_file
+    echo done
+}
