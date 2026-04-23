@@ -14,10 +14,6 @@ setopt MULTIOS
 # source local updates
 [ -f $HOME/.zshrc.local ] && source "$HOME/.zshrc.local"
 
-# opts
-# [[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" history-beginning-search-backward
-# [[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" history-beginning-search-forward
-
 [ -f $HOME/.local/bin/env ] && source $HOME/.local/bin/env
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

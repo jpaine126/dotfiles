@@ -22,6 +22,11 @@ install_links () {
         ln -svf "${DOTFILES}/zsh/${file}" "$DOTFILES_DEST/zsh"
     done
 
+    mkdir -p "${DOTFILES_DEST}/bash"
+    for file in $( ls -Ap ${DOTFILES}/bash | grep -v / | grep -vE ${exclusion_regex} ) ; do
+        ln -svf "${DOTFILES}/bash/${file}" "$DOTFILES_DEST/bash"
+    done
+
     # link specific files with no pattern
     mkdir -p "${DOTFILES_DEST}/.vim"
     ln -svf "${DOTFILES}/ftplugin" "${DOTFILES_DEST}/.vim"

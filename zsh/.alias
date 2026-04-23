@@ -1,50 +1,6 @@
 export CLICOLOR=true
 
-
-# dirstack
-alias d="dirs -v | head -10"
-alias 1="cd -"
-alias 2="cd -2"
-alias 3="cd -3"
-alias 4="cd -4"
-alias 5="cd -5"
-alias 6="cd -6"
-alias 7="cd -7"
-alias 8="cd -8"
-alias 9="cd -9"
-
-
-# general
-alias ll="ls -lha"
-
-alias cd1="cd .."
-alias cd2="cd ../.."
-alias cd3="cd ../../.."
-alias cd4="cd ../../../.."
-alias cd5="cd ../../../../.."
+[ -f $HOME/bash/.alias ] && source "$HOME/bash/.alias"
 
 alias zsource="source ~/.zshrc"
-
-
-# tree
-alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|;|;g'"
-
-
-# git
-alias ga="git add"
-alias gcm="git commit -m"
-
-
-# apps
-if which nvim ls > /dev/null; then
-    alias vim="nvim"
-fi
-
-vactivate () {
-    source "${1}/bin/activate"
-}
-
-# conda
-alias condaenvs="conda info --envs"
-alias condaa="conda activate"
 

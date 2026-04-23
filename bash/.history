@@ -1,0 +1,7 @@
+HISTFILE=~/.HISTFILE.BASH
+HISTSIZE=1000
+SAVEHIST=1000
+
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
