@@ -4,6 +4,7 @@ set mouse=a
 
 "colors
 colorscheme slate
+
 "UI
 set nowrap
 set cursorline

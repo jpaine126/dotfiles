@@ -1,4 +1,4 @@
-vim.cmd.source("~/.vimrc")
+local g = vim.g
 
 require("config.lazy")
 
