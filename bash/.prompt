@@ -1,29 +1,83 @@
-export EMPTY_STYLE='%f%k%F{default}%K{default}'
+# ---------- Colors (ANSI) ----------
+RESET="\[\e[0m\]"
 
-export GREEN_BG_P='%f%k%F{default}%K{green}'
-export BLUE_BG_P='%f%k%F{default}%K{blue}'
-export RED_BG_P='%f%k%F{default}%K{red}'
-export YELLOW_BG_P='%f%k%F{default}%K{yellow}'
+FG_GREEN="\[\e[32m\]"
+FG_BLUE="\[\e[34m\]"
+FG_RED="\[\e[31m\]"
+FG_YELLOW="\[\e[33m\]"
+FG_CYAN="\[\e[36m\]"
+FG_BLACK="\[\e[30m\]"
+FG_WHITE="\[\e[37m\]"
 
-export GREENP='%f%k%F{green}%K{default}'
-export BLUEP='%f%k%F{blue}%K{default}'
-export REDP='%f%k%F{red}%K{default}'
-export YELLOWP='%f%k%F{yellow}%K{default}'
-export CYANP='%f%k%F{cyan}%K{default}'
-export BLACKP='%f%k%F{black}%K{default}'
-export WHITEP='%f%k%F{white}%K{default}'
-export DEFAULTP='%f%k%F{default}%K{default}'
+BG_GREEN="\[\e[42m\]"
+BG_BLUE="\[\e[44m\]"
+BG_RED="\[\e[41m\]"
+BG_YELLOW="\[\e[43m\]"
 
-# export LSCOLORS="no=37;40:fi=37;40:di=36:40;ln=35;40:pi=31;40:so=22;40:bd=44;37:cd=44;37:ex=32;40"
+EMPTY_STYLE="$RESET"
 
-export PROMPT_NUM_DIRS=3
+GREEN_BG_P="${RESET}${BG_GREEN}"
+BLUE_BG_P="${RESET}${BG_BLUE}"
+RED_BG_P="${RESET}${BG_RED}"
+YELLOW_BG_P="${RESET}${BG_YELLOW}"
 
-export USER_HOST_COLOR=$BLUE_BG_P
-export GIT_INFO_COLOR=$YELLOWP
-export CWD_COLOR=$GREENP
+GREENP="${RESET}${FG_GREEN}"
+BLUEP="${RESET}${FG_BLUE}"
+REDP="${RESET}${FG_RED}"
+YELLOWP="${RESET}${FG_YELLOW}"
+CYANP="${RESET}${FG_CYAN}"
+BLACKP="${RESET}${FG_BLACK}"
+WHITEP="${RESET}${FG_WHITE}"
+DEFAULTP="${RESET}"
 
-export CMD_LINE_COLOR=$EMPTY_STYLE
+# ---------- Config ----------
+PROMPT_NUM_DIRS=3
 
-export SEG_SEP="${EMPTY_STYLE} "
+USER_HOST_COLOR=$BLUE_BG_P
+GIT_INFO_COLOR=$YELLOWP
+CWD_COLOR=$GREENP
+CMD_LINE_COLOR=$EMPTY_STYLE
 
-export ENDSYMBOL="${EMPTY_STYLE}>"
+SEG_SEP="${EMPTY_STYLE} "
+ENDSYMBOL="${EMPTY_STYLE}>"
+
+# ---------- Git Segment ----------
+git_seg() {
+    branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    if [[ -n "$branch" ]]; then
+        # Check for changes
+        if ! git diff --quiet 2>/dev/null; then
+            dirty="*"
+        else
+            dirty=""
+        fi
+        echo "${SEG_SEP}${GIT_INFO_COLOR}${branch}${dirty}"
+    fi
+}
+
+# ---------- Truncated Path ----------
+cwd_truncated() {
+    # similar to %3~ in zsh
+    pwd | awk -F/ '{
+        n=NF;
+        if (n <= '"$PROMPT_NUM_DIRS"') {
+            print $0;
+        } else {
+            for (i=n-'"$PROMPT_NUM_DIRS"'+1; i<=n; i++) {
+                printf "/%s", $i;
+            }
+            print "";
+        }
+    }'
+}
+
+# ---------- Prompt Builder ----------
+build_prompt() {
+    PS1="${USER_HOST_COLOR}\u@\h"
+    PS1+="$(git_seg)"
+    PS1+="${SEG_SEP}${CWD_COLOR}$(cwd_truncated)"
+    PS1+="${SEG_SEP}${ENDSYMBOL}${SEG_SEP}${CMD_LINE_COLOR}"
+}
+
+PROMPT_COMMAND=build_prompt
+
