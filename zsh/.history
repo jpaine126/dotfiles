@@ -6,14 +6,16 @@ HISTFILE=~/.HISTFILE.ZSH
 HISTSIZE=1000
 SAVEHIST=1000
 
-# autoload -U history-search-end
-# zle -N history-beginning-search-backward-end history-search-end
-# zle -N history-beginning-search-forward-end history-search-end
-# bindkey "^[[A" history-beginning-search-backward-end
-# bindkey "^[[B" history-beginning-search-forward-end
+zmodload zsh/terminfo
 
+# bindings for osx
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end
 
-
+# bindings for other
 # start typing + [Up-Arrow] - fuzzy find history forward
 if [[ "${terminfo[kcuu1]}" != "" ]]; then
     autoload -U up-line-or-beginning-search
