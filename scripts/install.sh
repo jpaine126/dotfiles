@@ -13,7 +13,14 @@ install_links () {
 
     #link folders in base folder
     for file in $( ls -Ap ${DOTFILES} | grep -v / | grep -vE ${exclusion_regex} ) ; do
-        ln -svf "${DOTFILES}/${file}" "$DOTFILES_DEST"
+        local dest
+        if [[ $(basename $file) = .bashrc && $BASH_COMPATIBILITY == true ]]; then
+            dest="${DOTFILES_DEST}/.bash_aliases"
+        else
+            dest=$DOTFILES_DEST
+        fi
+
+        ln -svf "${DOTFILES}/${file}" "$dest"
     done
 
     # link files in specific nested folders
@@ -55,13 +62,38 @@ ABSPATH="$(readlinkf ./non-absolute/file)"
 export DOTFILES=$(dirname $(dirname $(readlinkf $0)))
 export DOTFILES_DEST=$HOME
 
+BASH_COMPATIBILITY=false
+
+excludes=()
+
+# Loop through all arguments
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -e)
+            shift       # Move to the next argument
+            while [[ $# -gt 0 && "$1" != -* ]]; do
+                excludes+=("$1")  # Collect items until another flag is found
+                shift
+            done
+            ;;
+        -b)
+            BASH_COMPATIBILITY=true
+            shift
+            ;;
+        *)
+            echo "Unknown argument: $1"
+            exit 1
+            ;;
+    esac
+done
+
 
 
 # zsh
 if ! command -v zsh >/dev/null 2>&1; then
     echo "zsh not installed"
 else
-    install_links $*
+    install_links "${excludes[@]}"
     config_git
 fi
 
