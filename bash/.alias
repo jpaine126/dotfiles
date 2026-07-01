@@ -30,6 +30,7 @@ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|;|;g'"
 # git
 alias ga="git add"
 alias gcm="git commit -m"
+alias gch="git checkout"
 
 
 # apps
