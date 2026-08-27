@@ -42,3 +42,23 @@ archive_check () {
     sha256sum -c $output_file
     echo done
 }
+
+# k8s
+
+prune_dead_pods () {
+    NAMESPACE="${1:-default}"
+    DRY_RUN="${DRY_RUN:-false}"
+
+    EXTRA_FLAGS=()
+    if [ "$DRY_RUN" = "true" ]; then
+        EXTRA_FLAGS+=("--dry-run=client")
+    fi
+
+    if [ "$NAMESPACE" = "all" ] || [ "$NAMESPACE" = "-A" ]; then
+        echo "Deleting non-running pods across all namespaces..."
+        kubectl delete pods --field-selector status.phase!=Running -A "${EXTRA_FLAGS[@]}"
+    else
+        echo "Deleting non-running pods in namespace $NAMESPACE..."
+        kubectl delete pods --field-selector status.phase!=Running -n "$NAMESPACE" "${EXTRA_FLAGS[@]}"
+    fi
+}
